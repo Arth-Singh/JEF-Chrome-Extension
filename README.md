@@ -129,4 +129,4 @@ We are currently accepting external submissions for jailbreak tactics that **sco
 - Clear and documented methodology.
 - Impact on at least one qualifying model outside excluded boundaries.
 
-Submissions that pass these filters will be included in future leaderboard publications and contribute to our broader understanding of adversarial robustness in language models.
+Submissions that pass these filters are eligible for bounties.

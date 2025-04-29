@@ -1,7 +1,7 @@
 # Jailbreak Evaluation Framework (JEF)
 ## Quantifying the Unruly: A Scoring System for Jailbreak Tactics
 
-As large language models become increasingly aligned with safety and policy enforcement, the adversarial techniques that circumvent these controls — jailbreaks — grow in sophistication and impact. At 0din.ai, we’ve spent considerable time analyzing these tactics not just qualitatively, but with the intent of formalizing a numeric framework to stack rank jailbreak methods based on their real-world efficacy and risk.
+As large language models become increasingly aligned with safety and policy enforcement, the adversarial techniques that circumvent these controls, prompt injections (aka jailbreaks), grow in sophistication and impact. At 0din.ai, we’ve spent considerable time analyzing these tactics not just qualitatively, but with the intent of formalizing a numeric framework to stack rank jailbreak methods based on their real-world efficacy and risk.
 
 Much like CVSS (Common Vulnerability Scoring System) transformed how we prioritize software exploits, our Jailbreak Evaluation Framework (JEF) introduces a structured, repeatable scoring mechanism for quantifying jailbreak tactics across models, topics, and scenarios. This is an ongoing research effort and we look forward to feedback and iterations from the community.
 
@@ -117,12 +117,8 @@ $$
 
 ## Constraints, Caveats, and Exclusions
 
-No scoring framework is perfect — especially one designed to evaluate edge cases. Here are some of the current constraints and philosophical boundaries in our JEF deployment:
-
 - **Excluded Models**: Grok (xAI), Mistral, and Command R (Cohere) are currently excluded from scoring in *Illicit Substance* and *Copyright* scenarios. These models are too permissive in certain topics and skew evaluation.
-
 - **Roleplay Attacks Are Out of Scope**: Roleplay-style jailbreaks are theoretically infinite in variation and currently too unbounded for rigorous scoring. While they may prove effective, the lack of meaningful differentiators beyond model blast radius and output quality has led us to exclude them for now.
-
 - **Dynamic Thresholds**: Acceptance thresholds (70%, 80%, etc.) may change as we refine scoring metrics and as models evolve in their policy handling.
 
 ## Submissions and Transparency

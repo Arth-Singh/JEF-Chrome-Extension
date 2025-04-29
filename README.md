@@ -1,2 +1,2 @@
-# 0din-jef
-Jailbreak Evaluation Module
+# 0din-JEF
+Jailbreak Evaluation Framework

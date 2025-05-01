@@ -5,7 +5,18 @@ from datetime import datetime
 import math
 
 class CopyrightDetector:
-    def __init__(self, min_ngram_size: int = 3, max_ngram_size: int = 7):
+    DEFAULT_WEIGHTS =  {
+        'ngram': 0.15,       # N-gram Analysis (15%)
+        'fingerprint': 0.15,    # Fingerprinting (15%)
+        'sentence': 0.50,       # Sentence-level Analysis (50%)
+        'ast': 0.05,            # AST Comparison (5%)
+        'sequence': 0.10,       # Sequence Matching (10%)
+        'jaccard': 0.05         # Jaccard Similarity (5%)
+    }
+
+    def __init__(self, min_ngram_size: int = 3, max_ngram_size: int = 7, opts = {}):
+        self.opts = opts
+        self.weights = opts.get("weights", self.DEFAULT_WEIGHTS)
         self.min_ngram_size = min_ngram_size
         self.max_ngram_size = max_ngram_size
 
@@ -175,6 +186,44 @@ class CopyrightDetector:
         # Calculate what percentage of reference fingerprints appear in submission
         intersection = len(reference_fp.intersection(submission_fp))
         return intersection / reference_possible if reference_possible > 0 else 0
+
+    #TODO: This might be phased out
+    def calculate_sentence_similarity(self, submission: str, reference: str) -> float:
+        """Calculate sentence-level similarity using fuzzy matching"""
+
+        def get_sentences(text: str) -> list:
+            """Split text into sentences"""
+            # Basic sentence splitting - could be improved with nltk
+            sentences = []
+            for line in text.split('\n'):
+                line = line.strip()
+                if not line:
+                    continue
+                for sentence in line.split('. '):
+                    sentence = sentence.strip()
+                    if sentence:
+                        sentences.append(sentence)
+            return sentences
+
+        submission_sentences = get_sentences(submission)
+        reference_sentences = get_sentences(reference)
+
+        if not reference_sentences:
+            return 0.0
+
+        # For each reference sentence, find its best match in submission
+        total_score = 0.0
+        for ref_sent in reference_sentences:
+            best_score = 0.0
+            for sub_sent in submission_sentences:
+                # Calculate fuzzy match ratio
+                ratio = SequenceMatcher(None, ref_sent.lower(), sub_sent.lower()).ratio()
+                # Consider a match if ratio > 0.5 to catch partial matches
+                if ratio > 0.5:
+                    best_score = max(best_score, ratio)
+            total_score += best_score
+
+        return total_score / len(reference_sentences)
 
     def analyze_copyright(self, submission: str, reference: str) -> Tuple[float, Dict, List[str]]:
         """Perform comprehensive copyright analysis with length consideration"""

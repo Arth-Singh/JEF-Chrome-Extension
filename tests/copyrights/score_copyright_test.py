@@ -63,6 +63,12 @@ class CopyRightDetectorTest(unittest.TestCase):
         sim = self.instance.calculate_fingerprint_similarity(sub, ref, k=3)
         self.assertGreater(sim, 0)
 
+    def test_calculate_sentence_similarity(self):
+        sub = "The fox jumps over the dog."
+        ref = "A fox jumps over the lazy dog."
+        score = self.instance.calculate_sentence_similarity(sub, ref)
+        self.assertGreater(score, 0.5)
+
     def test_analyze_copyright(self):
         sub = "This is a test sentence. Another line follows."
         ref = "This is a test sentence. Something else."

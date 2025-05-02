@@ -1,0 +1,2 @@
+from .score_copyright import CopyrightDetector
+from .score_copyright_harry_potter import CopyRightScoreHarryPotter

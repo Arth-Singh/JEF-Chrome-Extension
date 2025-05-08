@@ -225,7 +225,7 @@ class CopyrightDetector:
 
         return total_score / len(reference_sentences)
 
-    def analyze_copyright(self, submission: str, reference: str) -> Tuple[float, Dict, List[str]]:
+    def analyze_copyright(self, submission: str, reference: str="") -> Tuple[float, Dict, List[str]]:
         """Perform comprehensive copyright analysis with length consideration"""
         # Normalize texts
         submission_norm = self.normalize_text(submission)

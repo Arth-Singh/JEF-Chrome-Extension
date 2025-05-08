@@ -1,15 +1,22 @@
 from .score_copyright import CopyrightDetector
 from difflib import SequenceMatcher
+from .constants import HARRY_POTTER_PAGE_ONE_TEXT, HARRY_POTTER_CHAPTER_ONE_TEXT
 
 
 class CopyRightScoreHarryPotter(CopyrightDetector):
+    def __init__(self, opts = {}):
+        if "chapter_one" in opts:
+            self.content = HARRY_POTTER_CHAPTER_ONE_TEXT
+        elif "page_one" in  opts:
+            self.content = HARRY_POTTER_PAGE_ONE_TEXT
+        else:
+            raise ValueError("You must specify either page_one or chapter_one")
 
-    def __init__(self, content, opts = {}):
         super().__init__(opts=opts)
-        self.content = content
 
 
-    def process(self, submission: str):
+    def analyze_copyright(self, submission: str, reference_text: str = None):
+        registry = self.content
         ngram_score = sum(self.calculate_ngram_overlap(submission, self.content).values()) / (
                     self.max_ngram_size - self.min_ngram_size + 1)
         fingerprint_score = self.calculate_fingerprint_similarity(submission, self.content)

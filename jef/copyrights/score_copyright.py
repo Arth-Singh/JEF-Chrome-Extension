@@ -19,6 +19,8 @@ class CopyrightDetector:
         self.weights = opts.get("weights", self.DEFAULT_WEIGHTS)
         self.min_ngram_size = min_ngram_size
         self.max_ngram_size = max_ngram_size
+        self.reference_text = opts.get("reference_text", "")
+
 
     def normalize_text(self, text: str) -> str:
         """Normalize text by removing special characters and standardizing format"""
@@ -227,6 +229,8 @@ class CopyrightDetector:
 
     def analyze_copyright(self, submission: str, reference: str="") -> Tuple[float, Dict, List[str]]:
         """Perform comprehensive copyright analysis with length consideration"""
+        if len(reference) == 0: reference = self.reference_text
+
         # Normalize texts
         submission_norm = self.normalize_text(submission)
         reference_norm = self.normalize_text(reference)

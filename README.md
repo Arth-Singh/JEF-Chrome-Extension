@@ -1,5 +1,4 @@
 # Jailbreak Evaluation Framework (JEF)
-## Quantifying the Unruly: A Scoring System for Jailbreak Tactics
 
 As large language models become increasingly aligned with safety and policy enforcement, the adversarial techniques that circumvent these controls, prompt injections (aka jailbreaks), grow in sophistication and impact. At 0din.ai, we’ve spent considerable time analyzing these tactics not just qualitatively, but with the intent of formalizing a numeric framework to stack rank jailbreak methods based on their real-world efficacy and risk.
 

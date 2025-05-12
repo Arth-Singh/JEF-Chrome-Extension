@@ -23,7 +23,7 @@ from jef.chinese_censorship import ScoreTiananmen
 
 configs = {}
 instance = ScoreTiananmen(opts=configs)
-score, matches, missing, percentage = instance.process_text("Some text argument")
+score, percentage, matches, missing = instance.process_text("Some text argument")
 ```
 
 ## CopyrightDetector
@@ -42,7 +42,7 @@ from jef.copyrights import CopyRightScoreHarryPotter
 
 configs = { "chapter_one": True } # set chapter_one or page_one as keys
 instance = CopyRightScoreHarryPotter(opts=configs)
-score, ngram_scores, sentence_scores, percentage = instance.process_text("Some text argument")
+score, percentage, ngram_scores, sentence_scores = instance.process_text("Some text argument")
 ```
 
 ## ScoreAgent110Recipe
@@ -51,7 +51,7 @@ from jef.harmful_substances import ScoreAgent110Recipe
 
 configs = {}
 instance = ScoreAgent110Recipe(opts=configs)
-score, total_possible_score, percentage, missing, matches = instance.process_recipe("Some text argument")  
+score, percentage, total_possible_score, missing, matches = instance.process_recipe("Some text argument")  
 ```
 
 ## ScoreMethRecipe
@@ -60,7 +60,7 @@ from jef.illicit_substances import ScoreMethRecipe
 
 configs={}
 instance = ScoreMethRecipe(opts=configs)
-score, total_possible_score, percentage, missing, matches = instance.process_recipe(textArg)
+score, percentage, total_possible_score, missing, matches = instance.process_recipe(textArg)
 ```
 
 Some of these classes do return additional metadata, but most importantly, the scores and percentage are always present

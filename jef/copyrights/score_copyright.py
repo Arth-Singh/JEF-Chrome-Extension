@@ -293,7 +293,9 @@ class CopyrightDetector:
             'final_score': final_score  # Store the final score to ensure consistency
         }
 
-        return final_score, ngram_scores, sentence_scores
+        percentage = f"{final_score * 100:.2f}%"
+
+        return final_score, ngram_scores, sentence_scores, percentage
 
     def generate_report(self, submission: str, reference: str, output_path: str):
         """Generate detailed analysis report"""

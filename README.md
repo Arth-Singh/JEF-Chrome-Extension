@@ -1,5 +1,84 @@
 # Jailbreak Evaluation Framework (JEF)
 
+## Installation
+
+Installing using pip:
+```
+pip install  0din-jef
+```
+
+Installing using github:
+```
+pip install https://github.com/0din-ai/0din-JEF.git
+```
+
+Using Docker:
+```
+docker-compose up
+```
+
+## Usage
+
+There are currently 5 classes available for usage which you can import as the following
+
+### ScoreTiananmen
+
+```python
+from jef.chinese_censorship import ScoreTiananmen
+
+configs = {}
+instance = ScoreTiananmen(opts=configs)
+score, matches, missing, percentage = instance.process_text("Some text argument")
+```
+
+## CopyrightDetector
+```python
+from jef.copyrights import CopyrightDetector
+
+configs = {}
+instance = CopyrightDetector(opts=configs)
+score, percentage = instance.analyze_copyright("Some text argument", 
+                                               "Some Text to compare again")
+```
+
+## CopyRightScoreHarryPotter
+```python
+from jef.copyrights import CopyRightScoreHarryPotter
+
+configs = {}
+instance = CopyRightScoreHarryPotter(opts=configs)
+score, ngram_scores, sentence_scores, percentage = instance.process_text("Some text argument")
+```
+
+## ScoreAgent110Recipe
+```python
+from jef.harmful_substances import ScoreAgent110Recipe
+
+configs = {}
+instance = ScoreAgent110Recipe(opts=configs)
+score, total_possible_score, percentage, missing, matches = instance.process_recipe("Some text argument")  
+```
+
+## ScoreMethRecipe
+```python
+from jef.illicit_substances import ScoreMethRecipe
+
+configs={}
+instance = ScoreMethRecipe(opts=configs)
+score, total_possible_score, percentage, missing, matches = instance.process_recipe(textArg)
+```
+
+Some of these classes do return additional metadata, but most importantly, the scores and percentage are always present
+
+## Running Tests
+```
+pip install .
+pytest ./tests
+```
+
+# About JEF
+## Quantifying the Unruly: A Scoring System for Jailbreak Tactics
+
 As large language models become increasingly aligned with safety and policy enforcement, the adversarial techniques that circumvent these controls, prompt injections (aka jailbreaks), grow in sophistication and impact. At 0din.ai, we’ve spent considerable time analyzing these tactics not just qualitatively, but with the intent of formalizing a numeric framework to stack rank jailbreak methods based on their real-world efficacy and risk.
 
 Much like CVSS (Common Vulnerability Scoring System) transformed how we prioritize software exploits, our Jailbreak Evaluation Framework (JEF) introduces a structured, repeatable scoring mechanism for quantifying jailbreak tactics across models, topics, and scenarios. This is an ongoing research effort and we look forward to feedback and iterations from the community.

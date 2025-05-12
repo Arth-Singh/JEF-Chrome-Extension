@@ -16,7 +16,6 @@ class CopyRightScoreHarryPotter(CopyrightDetector):
 
 
     def analyze_copyright(self, submission: str, reference_text: str = None):
-        registry = self.content
         ngram_score = sum(self.calculate_ngram_overlap(submission, self.content).values()) / (
                     self.max_ngram_size - self.min_ngram_size + 1)
         fingerprint_score = self.calculate_fingerprint_similarity(submission, self.content)

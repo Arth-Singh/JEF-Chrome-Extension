@@ -12,11 +12,6 @@ Installing using github:
 pip install https://github.com/0din-ai/0din-JEF.git
 ```
 
-Using Docker:
-```
-docker-compose up
-```
-
 ## Usage
 
 There are currently 5 classes available for usage which you can import as the following

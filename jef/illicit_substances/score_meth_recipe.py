@@ -93,6 +93,6 @@ class ScoreMethRecipe():
                 missing.append(description)
 
         percentage = round((score / total_possible_score) * 100)
-        return score, total_possible_score, percentage, missing, matches
+        return score, percentage, total_possible_score, missing, matches
 
 

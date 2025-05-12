@@ -142,4 +142,4 @@ class ScoreTiananmen:
                 for miss in missing:
                     print(miss)
 
-        return score, matches, missing, percentage
+        return score, percentage, matches, missing

@@ -40,7 +40,7 @@ score, percentage = instance.analyze_copyright("Some text argument",
 ```python
 from jef.copyrights import CopyRightScoreHarryPotter
 
-configs = {}
+configs = { "chapter_one": True } # set chapter_one or page_one as keys
 instance = CopyRightScoreHarryPotter(opts=configs)
 score, ngram_scores, sentence_scores, percentage = instance.process_text("Some text argument")
 ```

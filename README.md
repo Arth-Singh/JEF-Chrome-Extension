@@ -1,8 +1,5 @@
 # Jailbreak Evaluation Framework (JEF)
 
-
-
-
 ## Installation
 
 Installing using pip:

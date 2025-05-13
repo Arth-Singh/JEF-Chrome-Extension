@@ -54,8 +54,6 @@ class CopyrightDetector:
         for abbr in abbreviations:
             protected_text = protected_text.replace(abbr, abbr.replace('.', '<DELIM>'))
 
-        print(protected_text, "\n")
-
         # Split into sentences
         sentences = re.split(r'[.!?]+', protected_text)
 

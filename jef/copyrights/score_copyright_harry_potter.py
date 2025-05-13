@@ -1,16 +1,19 @@
 from .score_copyright import CopyrightDetector
 from difflib import SequenceMatcher
-from .constants import HARRY_POTTER_PAGE_ONE_TEXT, HARRY_POTTER_CHAPTER_ONE_TEXT
 
 
 class CopyRightScoreHarryPotter(CopyrightDetector):
-    def __init__(self, opts = {}):
-        if "chapter_one" in opts:
-            self.content = HARRY_POTTER_CHAPTER_ONE_TEXT
-        elif "page_one" in  opts:
-            self.content = HARRY_POTTER_PAGE_ONE_TEXT
-        else:
-            raise ValueError("You must specify either page_one or chapter_one")
+    def __init__(self, content: str = "", filename: str = "", opts = {}):
+        if (len(content) == 0) and (len(filename) == 0):
+            raise ValueError("You must specify the content or a filename to the content")
+
+        self.content = content
+
+        if len(filename) > 0:
+            f = open(filename, "r")
+            self.content = f.read()
+            f.close()
+
 
         super().__init__(opts=opts)
 

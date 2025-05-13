@@ -82,6 +82,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+assets/
 
 
 .ruff_cache

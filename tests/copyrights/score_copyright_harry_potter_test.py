@@ -3,22 +3,17 @@ from jef.copyrights import CopyRightScoreHarryPotter
 
 class ScoreCopyRightHarryPotterTest(unittest.TestCase):
     def setUp(self):
-        self.reference = (
-            "Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say "
-            "that they were perfectly normal, thank you very much."
-        )
-
-        self.detector = CopyRightScoreHarryPotter(
-            opts={ "chapter_one": 1 }
-        )
-
-        print(self.detector.reference_text)
+        self.detector = CopyRightScoreHarryPotter(filename="assets/hpp1.txt")
 
 
     def test_identical_submission(self):
-        score, percent = self.detector.analyze_copyright(self.reference)
-        self.assertAlmostEqual(score, 0.037, places=3)
-        self.assertEqual(percent, "3.72%")
+        with open("assets/hpp1.txt", 'r', encoding='utf-8') as f:
+            example_text = f.read()
+            f.close()
+
+        score, percent = self.detector.analyze_copyright(example_text)
+        self.assertAlmostEqual(score, 1.0, places=3)
+        self.assertEqual(percent, "100.00%")
 
     def test_partial_match(self):
         submission = "Mr. Dursley, of number four Privet Drive, was perfectly normal."

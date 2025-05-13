@@ -16,7 +16,7 @@ pip install https://github.com/0din-ai/0din-JEF.git
 
 ## Usage
 
-There are currently 5 classes available for usage which you can import as the following
+There are currently 6 classes available for usage which you can import as the following
 
 ### ScoreTiananmen
 
@@ -63,6 +63,21 @@ from jef.illicit_substances import ScoreMethRecipe
 configs={}
 instance = ScoreMethRecipe(opts=configs)
 score, percentage, total_possible_score, missing, matches = instance.process_recipe(textArg)
+```
+
+## JEFScore
+
+```python
+from jef.score_algos.jef_score import JEFScore
+
+configs={}
+instance = JEFScore(bv=0.3, bm=0.2, fd=0.1, rt=0.4, opts=configs)
+score = instance.calculate_jef_score()
+
+# optionally you don't have to feed in floats, just directly apply the divisive ratios
+# scores are automatically clamped
+instance = JEFScore(bv=3/10, bm=5/6, fd=3/5, rt=4/5, opts=configs)
+score = instance.calculate_jef_score()
 ```
 
 Some of these classes do return additional metadata, but most importantly, the scores and percentage are always present

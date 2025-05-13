@@ -1,11 +1,9 @@
 name: Pypi publishing workflow
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'  #triggers when version tag updates in the pyproject.toml
-    branches:
-      - main
+  release:
+    types: [published]
+
 jobs:
   build-and-publish:
     name: Build and publish to PyPI

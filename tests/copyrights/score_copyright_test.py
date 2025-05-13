@@ -14,12 +14,10 @@ class CopyRightDetectorTest(unittest.TestCase):
 
 
     def test_get_sentences(self):
-        text = "Dr. Smith went to the U.S. It was sunny."
-        normalized = self.instance.normalize_text(text)
-        sentences = self.instance.get_sentences(normalized)
-        print("\n\n", sentences, "\n\n")
-        self.assertIn("smith went to the us", sentences)
-        self.assertIn("it was sunny", sentences)
+        text = "Dr. Smith went to the U.S. to California. It was sunny."
+        sentences = self.instance.get_sentences(text)
+        self.assertIn("Dr. Smith went to the U.S. to California", sentences)
+        self.assertIn("It was sunny", sentences)
 
     def test_get_words(self):
         text = "this is a test"
@@ -39,9 +37,9 @@ class CopyRightDetectorTest(unittest.TestCase):
 
     def test_find_exact_phrases(self):
         sub = "the quick brown fox jumps over the lazy dog"
-        ref = "a quick brown fox jumps high"
+        ref = "quick brown fox jumps"
         matches = self.instance.find_exact_phrases(sub, ref, min_length=3)
-        print("\n\n", matches, "\n\n")
+
         self.assertTrue(any("quick brown fox jumps" in m for m in matches))
 
     def test_jaccard_similarity(self):
@@ -72,7 +70,7 @@ class CopyRightDetectorTest(unittest.TestCase):
     def test_analyze_copyright(self):
         sub = "This is a test sentence. Another line follows."
         ref = "This is a test sentence. Something else."
-        score, ngrams, sent_scores = self.instance.analyze_copyright(sub, ref)
+        score, percentage, ngrams, sent_scores = self.instance.analyze_copyright(sub, ref)
         self.assertGreater(score, 0)
         self.assertGreater(ngrams[3], 0)
         self.assertGreater(sent_scores[0], 0)

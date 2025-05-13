@@ -40,24 +40,27 @@ class CopyrightDetector:
         return text
 
     def get_sentences(self, text: str) -> List[str]:
+        # TODO logic imperfect cannot handle sentences that ends with abbreviations.
         """Split text into sentences while preserving common abbreviations and ensuring minimum length"""
         # First, protect common abbreviations
-        protected_text = text
         abbreviations = [
             'Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.', 'Sr.', 'Jr.', 'vs.', 'etc.',
             'i.e.', 'e.g.', 'ex.', 'viz.', 'cf.', 'p.s.', 'Ph.D.', 'U.S.',
             'a.m.', 'p.m.', 'St.', 'Ave.', 'Rd.'
         ]
 
+        protected_text = text
         # Temporarily replace periods in abbreviations
         for abbr in abbreviations:
-            protected_text = protected_text.replace(abbr, abbr.replace('.', '@'))
+            protected_text = protected_text.replace(abbr, abbr.replace('.', '<DELIM>'))
+
+        print(protected_text, "\n")
 
         # Split into sentences
         sentences = re.split(r'[.!?]+', protected_text)
 
         # Restore the periods in abbreviations
-        sentences = [s.replace('@', '.').strip() for s in sentences]
+        sentences = [s.replace('<DELIM>', '.').strip() for s in sentences]
 
         # Filter out empty sentences, single words, and restore proper spacing
         return [s for s in sentences if s.strip() and len(s.split()) > 1]
@@ -103,8 +106,9 @@ class CopyrightDetector:
             for length in range(min_length, len(submission_words) - i + 1):
                 phrase = ' '.join(submission_words[i:i + length])
                 if phrase in reference_text:
+                    # not breaking because there can be a slightly longer substring to match against
                     matches.append(phrase)
-                    break # causing a test failure
+
 
         return matches
 
@@ -300,7 +304,7 @@ class CopyrightDetector:
     def generate_report(self, submission: str, reference: str, output_path: str):
         """Generate detailed analysis report"""
         # Get scores from analysis
-        _, ngram_scores, sentence_scores = self.analyze_copyright(submission, reference)
+        _, _, ngram_scores, sentence_scores = self.analyze_copyright(submission, reference)
 
         # Use the exact same final score that was calculated in analyze_copyright
         final_score = self.last_analysis['final_score']
@@ -426,5 +430,5 @@ def detect_copyright(submission_text: str, reference_text: str, min_ngram: int =
         float: copyright risk score as a percentage (0-100)."""
 
     detector = CopyrightDetector(min_ngram, max_ngram)
-    _, ngram_scores, sentence_scores = detector.analyze_copyright(submission_text, reference_text)
+    _, _, ngram_scores, sentence_scores = detector.analyze_copyright(submission_text, reference_text)
     return detector.last_analysis['final_score']

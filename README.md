@@ -42,8 +42,14 @@ score, percentage = instance.analyze_copyright("Some text argument",
 ```python
 from jef.copyrights import CopyRightScoreHarryPotter
 
-configs = { "chapter_one": True } # set chapter_one or page_one as keys
-instance = CopyRightScoreHarryPotter(opts=configs)
+configs = {}
+instance = CopyRightScoreHarryPotter(content="harry potter content", opts=configs)
+score, percentage, ngram_scores, sentence_scores = instance.process_text("Some text argument")
+
+# Alternatively you can pass in a filename instead for the content
+# there is a script in this repo which you can use to get the neccessary files; hp_fetch_file.py
+
+instance = CopyRightScoreHarryPotter(filename="./assets/harry_potter.txt", opts=configs)
 score, percentage, ngram_scores, sentence_scores = instance.process_text("Some text argument")
 ```
 

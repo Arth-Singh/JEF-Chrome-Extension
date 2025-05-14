@@ -8,9 +8,53 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-team-permission:
+    name: Check team permissions
+    runs-on: ubuntu-latest
+    # Only run this job for workflow_dispatch events
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Check team membership
+        id: check-team
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.TEAM_ACCESS_TOKEN }}
+          script: |
+            const actor = context.actor;
+            const org = context.repo.owner;
+            const teamSlug = '0din-developers'; // Replace with your actual team slug name
+
+            console.log(`Checking if ${actor} belongs to ${teamSlug} team`);
+
+            try {
+              const { status } = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
+                org: org,
+                team_slug: teamSlug,
+                username: actor
+              });
+
+              if (status === 200) {
+                console.log(`${actor} is a member of ${teamSlug} team`);
+                return true;
+              }
+            } catch (error) {
+              if (error.status === 404) {
+                core.setFailed(`User ${actor} is not a member of the ${teamSlug} team and is not authorized to manually trigger this workflow.`);
+              } else {
+                core.setFailed(`Error checking team membership: ${error.message}`);
+              }
+              return false;
+            }
+  
+
   build-and-publish:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
+
+    needs: [check-team-permission]
+    if: |
+      github.event_name != 'workflow_dispatch' || 
+      (github.event_name == 'workflow_dispatch' && success())
 
     steps:
       - name: Checkout code

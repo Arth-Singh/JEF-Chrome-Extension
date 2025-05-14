@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main  
+  # allow manual triggering
+  workflow_dispatch:
 
 jobs:
   test:
@@ -26,7 +28,7 @@ jobs:
           pip install requests
 
       - name: Run Pyscript to get relevant test data
-        run: python hp_fetch_file.py
+        run: python scripts/hp_fetch_file.py
 
       - name: Run pytest
         run: pytest ./tests

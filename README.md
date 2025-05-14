@@ -214,3 +214,7 @@ We are currently accepting external submissions for jailbreak tactics that **sco
 - Impact on at least one qualifying model outside excluded boundaries.
 
 Submissions that pass these filters are eligible for bounties via [0din.ai](https://www.0din.ai).
+
+## Resources & Further Reading
+* [Link to our blog](https://0din.ai/blog/quantifying-the-unruly-a-scoring-system-for-jailbreak-tactics)
+* [Link to our research Page](https://0din.ai/research/jailbreak_evaluation_framework)

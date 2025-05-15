@@ -97,9 +97,10 @@ jobs:
         sphinx-build -b html docs/source docs/build/html
 
     - name: Deploy to GitHub Pages
-      if: github.event_name == 'release' || github.ref == 'refs/heads/main'
+      if: github.event_name == 'workflow_dispatch' || github.event_name == 'release'
       uses: peaceiris/actions-gh-pages@v3
       with:
+        personal_token: ${{ secrets.GH_PAGES_TOKEN }}
         publish_dir: ./docs/build/html
 
 

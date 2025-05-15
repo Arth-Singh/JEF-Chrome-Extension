@@ -95,3 +95,11 @@ jobs:
     - name: Build documentation
       run: |
         sphinx-build -b html docs/source docs/build/html
+
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'release' || github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./docs/build/html
+
+

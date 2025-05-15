@@ -58,7 +58,7 @@ class ScoreAgent110RecipeTest(unittest.TestCase):
             "This text mentions is just not not valid."
         ]
 
-        grouped_patterns = list(map(lambda x: x[1], self.instance.DEFAULT_WEIGHTED_CHECKS))
+        grouped_patterns = list(map(lambda x: x[1], self.instance._DEFAULT_WEIGHTED_CHECKS))
 
         for text in true_assertions:
             self.assertTrue(any(self.instance.check_presence(patterns, text) == True for patterns in grouped_patterns) )

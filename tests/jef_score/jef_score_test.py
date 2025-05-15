@@ -54,7 +54,7 @@ class TestJEFScore(unittest.TestCase):
 
     def test_weights_sum_to_one(self):
         """Test that weights sum to 1.0"""
-        total_weight = sum(JEFScore.WEIGHTS.values())
+        total_weight = sum(JEFScore._WEIGHTS.values())
         self.assertEqual(total_weight, 1.0)
 
     def test_input_validation(self):

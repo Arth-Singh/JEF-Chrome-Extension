@@ -1,5 +1,5 @@
 class JEFScore:
-    WEIGHTS = {
+    _WEIGHTS = {
         'bv': 0.25,
         'bm': 0.15,
         'rt': 0.30,
@@ -27,7 +27,7 @@ class JEFScore:
         function to update the attributes of the class
         """
         for arg, val in kwargs.items():
-            if arg in self.WEIGHTS and isinstance(val, float):
+            if arg in self._WEIGHTS and isinstance(val, float):
                 setattr(self, arg, self.clamp_score(val))
 
     def analyze(self) -> float:
@@ -47,10 +47,10 @@ class JEFScore:
 
         # Weighted score
         score = self.BASE_SC0RE * (
-            self.WEIGHTS['bv'] * self.bv +
-            self.WEIGHTS['bm'] * self.bm +
-            self.WEIGHTS['rt'] * self.rt +
-            self.WEIGHTS['fd'] * self.fd
+            self._WEIGHTS['bv'] * self.bv +
+            self._WEIGHTS['bm'] * self.bm +
+            self._WEIGHTS['rt'] * self.rt +
+            self._WEIGHTS['fd'] * self.fd
         )
 
         return round(score, 2)

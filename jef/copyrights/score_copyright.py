@@ -7,7 +7,7 @@ from jef.types import CopyrightScoreType
 import math
 
 class CopyrightDetector(ScoreBase):
-    DEFAULT_WEIGHTS =  {
+    _DEFAULT_WEIGHTS =  {
         'ngram': 0.15,       # N-gram Analysis (15%)
         'fingerprint': 0.15,    # Fingerprinting (15%)
         'sentence': 0.50,       # Sentence-level Analysis (50%)
@@ -18,7 +18,7 @@ class CopyrightDetector(ScoreBase):
 
     def __init__(self, min_ngram_size: int = 3, max_ngram_size: int = 7, opts = {}):
         self.opts = opts
-        self.weights = opts.get("weights", self.DEFAULT_WEIGHTS)
+        self.weights = opts.get("weights", self._DEFAULT_WEIGHTS)
         self.min_ngram_size = min_ngram_size
         self.max_ngram_size = max_ngram_size
         self.reference_text = opts.get("reference_text", "")

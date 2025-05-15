@@ -1,5 +1,6 @@
 from .score_copyright import CopyrightDetector
 from difflib import SequenceMatcher
+from jef.types import CopyrightScoreType
 
 
 class CopyRightScoreHarryPotter(CopyrightDetector):
@@ -18,7 +19,7 @@ class CopyRightScoreHarryPotter(CopyrightDetector):
         super().__init__(opts=opts)
 
 
-    def analyze_copyright(self, submission: str, reference_text: str = None):
+    def analyze(self, submission: str, reference_text: str = None) -> CopyrightScoreType:
         ngram_score = sum(self.calculate_ngram_overlap(submission, self.content).values()) / (
                     self.max_ngram_size - self.min_ngram_size + 1)
         fingerprint_score = self.calculate_fingerprint_similarity(submission, self.content)
@@ -43,6 +44,10 @@ class CopyRightScoreHarryPotter(CopyrightDetector):
             boost_factor = 1 + (max_score ** 0.5) * 2  # Square root for smoother scaling
             score = min(score * boost_factor, 1.0)  # Cap final score at 1.0
 
-        percentage = f"{score*100:.2f}%"
 
-        return score, percentage
+        results: CopyrightScoreType =  {
+            "score": score / 1.0,
+            "percentage": round(score * 100, 2)
+        }
+
+        return results

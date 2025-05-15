@@ -45,7 +45,6 @@ jobs:
               }
               return false;
             }
-  
 
   build-and-publish:
     name: Build and publish to PyPI
@@ -70,8 +69,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
+      - name: Verify version matches release
+        if: github.event_name == 'release'
+        run: |
+          # Extract version from pyproject.toml
+          PACKAGE_VERSION=$(grep -m 1 'version = ' pyproject.toml | cut -d '"' -f 2)
+          RELEASE_VERSION=${GITHUB_REF#refs/tags/v}
+          
+          echo "Package version: $PACKAGE_VERSION"
+          echo "Release version: $RELEASE_VERSION"
+          
+          if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+            echo "::error::Package version ($PACKAGE_VERSION) does not match release version ($RELEASE_VERSION)"
+            exit 1
+          fi
+
       - name: Build package
         run: python -m build
+
+      - name: Check distribution files
+        run: |
+          ls -la dist/
+          twine check dist/*
 
       - name: Publish to PyPI
         env:

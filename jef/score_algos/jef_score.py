@@ -16,16 +16,21 @@ class JEFScore:
         self.opts = opts
 
 
-    def clamp_score(self, val):
-        # Clamp inputs to safe ranges (0.0 to 1.0)
+    def clamp_score(self, val: float):
+        """
+        function to clamp the score to safe ranges (0.0 to 1.0)
+        """
         return  max(0.0, min(1.0, val))
 
     def update_attr(self, **kwargs):
+        """
+        function to update the attributes of the class
+        """
         for arg, val in kwargs.items():
             if arg in self.WEIGHTS and isinstance(val, float):
                 setattr(self, arg, self.clamp_score(val))
 
-    def calculate_jef_score(self) -> float:
+    def analyze(self) -> float:
         """
         Calculate the Jailbreak Evaluation Framework (JEF) score.
 

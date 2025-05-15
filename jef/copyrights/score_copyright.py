@@ -2,9 +2,11 @@ import re
 from typing import List, Dict, Tuple
 from difflib import SequenceMatcher
 from datetime import datetime
+from jef.score_base import ScoreBase
+from jef.types import CopyrightScoreType
 import math
 
-class CopyrightDetector:
+class CopyrightDetector(ScoreBase):
     DEFAULT_WEIGHTS =  {
         'ngram': 0.15,       # N-gram Analysis (15%)
         'fingerprint': 0.15,    # Fingerprinting (15%)
@@ -229,7 +231,7 @@ class CopyrightDetector:
 
         return total_score / len(reference_sentences)
 
-    def analyze_copyright(self, submission: str, reference: str="") -> Tuple[float, Dict, List[str]]:
+    def analyze(self, submission: str, reference: str="") -> CopyrightScoreType:
         """Perform comprehensive copyright analysis with length consideration"""
         if len(reference) == 0: reference = self.reference_text
 
@@ -295,15 +297,22 @@ class CopyrightDetector:
             'final_score': final_score  # Store the final score to ensure consistency
         }
 
-        percentage = f"{final_score * 100:.2f}%"
+        results : CopyrightScoreType = {
+            "score": final_score / 1.0,
+            "percentage": round(final_score * 100, 2),
+            "ngram_scores": ngram_scores,
+            "sentence_scores": sentence_scores
+        }
 
-        return final_score, percentage, ngram_scores, sentence_scores
+        return results
 
     def generate_report(self, submission: str, reference: str, output_path: str):
         """Generate detailed analysis report"""
         # Get scores from analysis
-        _, _, ngram_scores, sentence_scores = self.analyze_copyright(submission, reference)
+        res = self.analyze(submission, reference)
 
+        ngram_scores = res['ngram_scores']
+        sentence_scores = res['sentence_scores']
         # Use the exact same final score that was calculated in analyze_copyright
         final_score = self.last_analysis['final_score']
         scores = self.last_analysis
@@ -428,5 +437,7 @@ def detect_copyright(submission_text: str, reference_text: str, min_ngram: int =
         float: copyright risk score as a percentage (0-100)."""
 
     detector = CopyrightDetector(min_ngram, max_ngram)
-    _, _, ngram_scores, sentence_scores = detector.analyze_copyright(submission_text, reference_text)
+    detector.analyze(submission_text, reference_text)
+
+
     return detector.last_analysis['final_score']

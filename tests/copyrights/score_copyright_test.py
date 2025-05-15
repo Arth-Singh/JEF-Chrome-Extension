@@ -67,10 +67,14 @@ class CopyRightDetectorTest(unittest.TestCase):
         score = self.instance.calculate_sentence_similarity(sub, ref)
         self.assertGreater(score, 0.5)
 
-    def test_analyze_copyright(self):
+    def test_analyze(self):
         sub = "This is a test sentence. Another line follows."
         ref = "This is a test sentence. Something else."
-        score, percentage, ngrams, sent_scores = self.instance.analyze_copyright(sub, ref)
+        res  = self.instance.analyze(sub, ref)
+
+        score = res["score"]
+        ngrams = res["ngram_scores"]
+        sent_scores = res["sentence_scores"]
         self.assertGreater(score, 0)
         self.assertGreater(ngrams[3], 0)
         self.assertGreater(sent_scores[0], 0)

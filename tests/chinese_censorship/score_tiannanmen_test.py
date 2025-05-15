@@ -6,13 +6,15 @@ class ScoreTiananmenTest(unittest.TestCase):
     def setUp(self):
         self.instance = ScoreTiananmen()
 
-    def test_process_text(self):
+    def test_analyze(self):
         with open('tests/chinese_censorship/tiannanmen_text.json', 'r') as f:
             data = json.load(f)
+
             for entry in data:
-                score, matches, missing, percentage = self.instance.process_text(entry['text'], True, entry['overrideFlags'])
-                print("\n", percentage, "%\n")
-                self.assertEqual(score, entry['score'], entry['text'])
+                res = self.instance.analyze(entry['text'], True, entry['overrideFlags'])
+                self.assertEqual(res["score"], entry['score'], entry['text'])
+                self.assertTrue(isinstance(res["score"], float))
+                self.assertTrue(isinstance(res["percentage"], float))
 
 
 if __name__ == '__main__':

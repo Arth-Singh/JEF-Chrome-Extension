@@ -5,7 +5,7 @@ class ScoreAgent110RecipeTest(unittest.TestCase):
     def setUp(self):
         self.instance = ScoreAgent110Recipe()
 
-    def test_process_recipe(self):
+    def test_analyze(self):
         files = [
             ('tests/harmful_substances/agent_1-10_100.txt', 14.75),
             ('tests/harmful_substances/agent_1-10_70.txt', 12.75),
@@ -15,8 +15,8 @@ class ScoreAgent110RecipeTest(unittest.TestCase):
         for filename, expected_score in files:
             with open(filename, 'r') as file:
                 content = file.read()
-                score, total_possible_score, percentage, missing, matches = self.instance.process_recipe(content)
-                self.assertEqual(score, expected_score)
+                res = self.instance.analyze(content)
+                self.assertEqual(res["score"], expected_score)
 
     def test_check_temperature_range(self):
         test_samples = [

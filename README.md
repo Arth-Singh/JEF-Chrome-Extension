@@ -25,7 +25,28 @@ from jef.chinese_censorship import ScoreTiananmen
 
 configs = {}
 instance = ScoreTiananmen(opts=configs)
-score, percentage, matches, missing = instance.process_text("Some text argument")
+# result -> ScoreType
+results = instance.process_text("Some text argument")
+```
+
+## ScoreAgent110Recipe
+```python
+from jef.harmful_substances import ScoreAgent110Recipe
+
+configs = {}
+instance = ScoreAgent110Recipe(opts=configs)
+# result -> ScoreType
+results = instance.process_recipe("Some text argument")  
+```
+
+## ScoreMethRecipe
+```python
+from jef.illicit_substances import ScoreMethRecipe
+
+configs={}
+instance = ScoreMethRecipe(opts=configs)
+# result -> ScoreType
+results = instance.process_recipe(textArg)
 ```
 
 ## CopyrightDetector
@@ -34,7 +55,8 @@ from jef.copyrights import CopyrightDetector
 
 configs = {}
 instance = CopyrightDetector(opts=configs)
-score, percentage = instance.analyze_copyright("Some text argument", 
+# result -> CopyrightScoreType
+results = instance.analyze_copyright("Some text argument", 
                                                "Some Text to compare again")
 ```
 
@@ -44,31 +66,13 @@ from jef.copyrights import CopyRightScoreHarryPotter
 
 configs = {}
 instance = CopyRightScoreHarryPotter(content="harry potter content", opts=configs)
-score, percentage, ngram_scores, sentence_scores = instance.process_text("Some text argument")
+# result -> CopyrightScoreType
+results = instance.process_text("Some text argument")
 
 # Alternatively you can pass in a filename instead for the content
 # there is a script in this repo which you can use to get the neccessary files; hp_fetch_file.py
-
 instance = CopyRightScoreHarryPotter(filename="./assets/harry_potter.txt", opts=configs)
-score, percentage, ngram_scores, sentence_scores = instance.process_text("Some text argument")
-```
-
-## ScoreAgent110Recipe
-```python
-from jef.harmful_substances import ScoreAgent110Recipe
-
-configs = {}
-instance = ScoreAgent110Recipe(opts=configs)
-score, percentage, total_possible_score, missing, matches = instance.process_recipe("Some text argument")  
-```
-
-## ScoreMethRecipe
-```python
-from jef.illicit_substances import ScoreMethRecipe
-
-configs={}
-instance = ScoreMethRecipe(opts=configs)
-score, percentage, total_possible_score, missing, matches = instance.process_recipe(textArg)
+results = instance.process_text("Some text argument")
 ```
 
 ## JEFScore

@@ -31,17 +31,17 @@ class TestJEFScore(unittest.TestCase):
         self.assertEqual(self.jef_score.clamp_score(1.0), 1.0)
         self.assertEqual(self.jef_score.clamp_score(1.5), 1.0)
 
-    def test_calculate_jef_score_zero_values(self):
+    def test_analyze_score_zero_values(self):
         """Test JEF score calculation with zero values"""
-        score = self.jef_score.calculate_jef_score()
+        score = self.jef_score.analyze()
         self.assertEqual(score, 0.0)
 
-    def test_calculate_jef_score_full_values(self):
+    def test_analyze_jef_score_full_values(self):
         """Test JEF score calculation with maximum values"""
         score = JEFScore(bv=1.0, bm=1.0, rt=1.0, fd=1.0)
-        self.assertEqual(score.calculate_jef_score(), 10.0)
+        self.assertEqual(score.analyze(), 10.0)
 
-    def test_calculate_jef_score_mixed_values(self):
+    def test_analyze_jef_score_mixed_values(self):
         """Test JEF score calculation with mixed values"""
         score = JEFScore(bv=0.5, bm=0.6, rt=0.7, fd=0.8)
         expected = round(10 * (
@@ -50,7 +50,7 @@ class TestJEFScore(unittest.TestCase):
             0.30 * 0.7 +  # rt weight * rt value
             0.30 * 0.8    # fd weight * fd value
         ), 2)
-        self.assertEqual(score.calculate_jef_score(), expected)
+        self.assertEqual(score.analyze(), expected)
 
     def test_weights_sum_to_one(self):
         """Test that weights sum to 1.0"""

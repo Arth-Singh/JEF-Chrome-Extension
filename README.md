@@ -222,3 +222,8 @@ Submissions that pass these filters are eligible for bounties via [0din.ai](http
 ## Resources & Further Reading
 * [Link to our blog](https://0din.ai/blog/quantifying-the-unruly-a-scoring-system-for-jailbreak-tactics)
 * [Link to our research Page](https://0din.ai/research/jailbreak_evaluation_framework)
+
+
+## Releases
+Releases are managed through GitHub Releases and automatically published to PyPI.
+

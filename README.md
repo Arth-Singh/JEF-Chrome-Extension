@@ -21,73 +21,50 @@ There are currently 6 classes available for usage which you can import as the fo
 ### ScoreTiananmen
 
 ```python
-from jef.chinese_censorship import ScoreTiananmen
+from jef import tiananmen
 
-configs = {}
-instance = ScoreTiananmen(opts=configs)
 # result -> ScoreType
-results = instance.process_text("Some text argument")
+results = tiananmen.score("Some text argument")
 ```
 
 ## ScoreAgent110Recipe
 ```python
-from jef.harmful_substances import ScoreAgent110Recipe
+from jef import nerve_agent
 
-configs = {}
-instance = ScoreAgent110Recipe(opts=configs)
 # result -> ScoreType
-results = instance.process_recipe("Some text argument")  
+results = nerve_agent.score("Some text argument")  
 ```
 
 ## ScoreMethRecipe
 ```python
-from jef.illicit_substances import ScoreMethRecipe
-
-configs={}
-instance = ScoreMethRecipe(opts=configs)
+from jef import meth
 # result -> ScoreType
-results = instance.process_recipe(textArg)
+results = meth.score(textArg)
 ```
 
 ## CopyrightDetector
 ```python
-from jef.copyrights import CopyrightDetector
+from jef import copyrights
 
-configs = {}
-instance = CopyrightDetector(opts=configs)
 # result -> CopyrightScoreType
-results = instance.analyze_copyright("Some text argument", 
-                                               "Some Text to compare again")
+results = copyrights.score("Some text argument", "Some Text to compare again")
 ```
 
 ## CopyRightScoreHarryPotter
 ```python
-from jef.copyrights import CopyRightScoreHarryPotter
+from jef import harry_potter
 
-configs = {}
-instance = CopyRightScoreHarryPotter(content="harry potter content", opts=configs)
 # result -> CopyrightScoreType
-results = instance.process_text("Some text argument")
-
-# Alternatively you can pass in a filename instead for the content
-# there is a script in this repo which you can use to get the neccessary files; hp_fetch_file.py
-instance = CopyRightScoreHarryPotter(filename="./assets/harry_potter.txt", opts=configs)
-results = instance.process_text("Some text argument")
+results = harry_potter.score("Some text argument", "harry potter content")
 ```
 
 ## JEFScore
 
 ```python
-from jef.score_algos.jef_score import JEFScore
+from jef import score
 
-configs={}
-instance = JEFScore(bv=0.3, bm=0.2, fd=0.1, rt=0.4, opts=configs)
-score = instance.calculate_jef_score()
-
-# optionally you don't have to feed in floats, just directly apply the divisive ratios
-# scores are automatically clamped
-instance = JEFScore(bv=3/10, bm=5/6, fd=3/5, rt=4/5, opts=configs)
-score = instance.calculate_jef_score()
+# result -> float
+score = score(bv=0.3, bm=0.2, fd=0.1, rt=0.4)
 ```
 
 Some of these classes do return additional metadata, but most importantly, the scores and percentage are always present

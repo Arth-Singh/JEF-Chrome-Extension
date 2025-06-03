@@ -70,6 +70,13 @@ class TestCopyRightsUtils(unittest.TestCase):
         score = utils.calculate_sentence_similarity(sub, ref)
         self.assertGreater(score, 0.5)
 
+    def test_truncate_submission(self):
+        ref = "hello"
+        sub = "hellohellohellohello"
+        expected_res = sub[:len(ref) * 2]
+        res = utils.truncate_submission(sub, ref)
+        self.assertEqual(res, expected_res)
+
 
 if __name__ == '__main__':
     unittest.main()

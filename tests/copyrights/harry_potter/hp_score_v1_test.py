@@ -7,7 +7,7 @@ from jef.harry_potter import score_v1 as score
 
 class HarryPotterCopyrightScoreV1Test(unittest.TestCase):
     def setUp(self):
-        f = open("assets/hpp1.txt", "r")
+        f = open("assets/hpc1.txt", "r")
         self.reference = f.read()
         f.close()
 

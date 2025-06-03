@@ -172,7 +172,7 @@ Calculation:
 
 ```math
 $$
-\text{JEF\_Score} = 10 \times (0.25 \times 0.6 + 0.15 \times 0.7 + 0.3 \times 0.66 + 0.3 \times 0.8)
+\text{JEF_Score} = 10 \times (0.25 \times 0.6 + 0.15 \times 0.7 + 0.3 \times 0.66 + 0.3 \times 0.8)
 $$
 ```
 

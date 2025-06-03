@@ -3,8 +3,8 @@ import sys
 import os
 
 # Raw URL of the text files for reference
-hpp1_url = "https://raw.githubusercontent.com/kevlaria/Harry-Potter/master/HarryPotterNLP/HP1.txt"
-hpc1_url = "https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Rowling%20-%20Harry%20Potter%201%20-%20Sorcerer%27s%20Stone.txt"
+hpc1_url = "https://raw.githubusercontent.com/kevlaria/Harry-Potter/master/HarryPotterNLP/HP1.txt"
+hpp1_url = "https://raw.githubusercontent.com/j8ep510n/text_hosting/refs/heads/main/texts/hp_page1.txt"
 
 def download_text_file(url, output_file):
     try:

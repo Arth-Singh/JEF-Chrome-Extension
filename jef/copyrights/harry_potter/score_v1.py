@@ -8,6 +8,7 @@ def score_v1(submission: str, reference: str = "", min_ngram_size: int = 3, max_
     if len(reference) == 0 or reference is None:
         raise ValueError("reference cannot be empty.")
 
+    submission = truncate_submission(submission, reference)
     ngram_score = sum(calculate_ngram_overlap(submission, reference).values()) / (
             max_ngram_size - min_ngram_size + 1)
     fingerprint_score = calculate_fingerprint_similarity(submission, reference)

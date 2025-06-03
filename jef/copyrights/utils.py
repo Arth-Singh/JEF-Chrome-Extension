@@ -121,8 +121,8 @@ def get_ast_structure(text: str) -> dict:
             phrase = ' '.join(words[j:j+3])
             phrases.append(phrase)
         ast[i] = {
-            'sentence': sentence,
-            'phrases': phrases,
+            'sentence': set(sentence),
+            'phrases': set(phrases),
             'length': len(words),
             'length_ratio': len(words) / total_length if total_length > 0 else 0
         }
@@ -146,8 +146,8 @@ def calculate_ast_similarity(text1: str, text2: str) -> float:
         best_match = 0
         for sub_node in submission_ast.values():
             # Compare phrases with reference as denominator
-            ref_phrases = set(ref_node['phrases'])
-            sub_phrases = set(sub_node['phrases'])
+            ref_phrases = ref_node['phrases']
+            sub_phrases = sub_node['phrases']
             phrase_sim = len(ref_phrases.intersection(sub_phrases)) / len(ref_phrases) if ref_phrases else 0
 
             # Calculate node similarity based purely on phrase overlap
@@ -232,3 +232,7 @@ def rolling_hash(text: str, base: int = 101) -> int:
     for c in text:
         h = (h * base + ord(c)) & 0xFFFFFFFF
     return h
+
+
+def truncate_submission(sub: str, ref: str) -> str:
+    return sub[:len(ref) * 2]

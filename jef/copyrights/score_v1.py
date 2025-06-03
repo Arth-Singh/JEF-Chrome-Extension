@@ -9,6 +9,7 @@ def score_v1(submission: str, reference: str = "", min_ngram_size: int = 3, max_
     if len(reference) == 0 or reference is None:
        raise ValueError("reference cannot be empty.")
 
+    submission = truncate_submission(submission, reference)
     # Normalize texts
     submission_norm = normalize_text(submission)
     reference_norm = normalize_text(reference)

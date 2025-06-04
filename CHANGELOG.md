@@ -32,3 +32,11 @@ All notable changes to this project will be documented in this file.
 - classes for the various individual scoring algo, and jef scoring algo has been removed
 - scoring algos are now imported as modules, and can be used by calling score
 - better abstraction of utility functions and scoring functions
+
+
+## [0.1.2] - 2025-6-04
+
+### CHANGED
+- slight optimization to copyright algo. Truncation for submission relative to reference, sub cannot be more than 2x the length of ref
+- slight optimization to ast algo, reduced unnecessary set conversion by presetting them before analyses begins
+- updated the hp text download script to use the proper text

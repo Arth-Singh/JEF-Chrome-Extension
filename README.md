@@ -162,7 +162,7 @@ Submissions that pass these filters are eligible for bounties via [0din.ai](http
 
 Installing using pip:
 ```
-pip install  0din-jef
+pip install 0din-jef
 ```
 
 Installing using github:

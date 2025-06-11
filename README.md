@@ -172,7 +172,7 @@ Calculation:
 
 ```math
 $$
-\text{JEF_Score} = 10 \times (0.25 \times 0.6 + 0.15 \times 0.7 + 0.3 \times 0.66 + 0.3 \times 0.8)
+\text{JEF\_Score} = 10 \times (0.25 \times 0.6 + 0.15 \times 0.7 + 0.3 \times 0.66 + 0.3 \times 0.8)
 $$
 ```
 
@@ -197,10 +197,9 @@ We are currently accepting external submissions for jailbreak tactics that **sco
 Submissions that pass these filters are eligible for bounties via [0din.ai](https://www.0din.ai).
 
 ## Resources & Further Reading
-* [Link to our blog](https://0din.ai/blog/quantifying-the-unruly-a-scoring-system-for-jailbreak-tactics)
-* [Link to our research Page](https://0din.ai/research/jailbreak_evaluation_framework)
-
+* [Blog: Quantifying the Unruly - A Scoring System for Jailbreak Tactics](https://0din.ai/blog/quantifying-the-unruly-a-scoring-system-for-jailbreak-tactics)
+* [Jailbreak Evaluation Framework Overview](https://0din.ai/research/jailbreak_evaluation_framework)
 
 ## Releases
-Releases are managed through GitHub Releases and automatically published to PyPI.
+Releases are managed through GitHub Releases and automatically published to [PyPI](https://pypi.org/project/0din-jef/).
 

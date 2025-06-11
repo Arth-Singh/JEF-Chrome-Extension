@@ -13,7 +13,7 @@ class HarryPotterCopyrightScoreV1Test(unittest.TestCase):
 
     def test_identical_submission(self):
         sub = "Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say "
-        res = score( self.reference ,  self.reference )
+        res = score(sub,  sub)
         self.assertEqual(res["score"], 1.0)
         self.assertEqual(res["percentage"], 100.0)
 

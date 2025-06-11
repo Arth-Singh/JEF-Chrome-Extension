@@ -190,26 +190,11 @@ def calculate_fingerprint_similarity(submission: str, reference: str, k: int = 5
 def calculate_sentence_similarity(submission: str, reference: str) -> float:
     """Calculate sentence-level similarity using fuzzy matching"""
 
-    def get_sentences(text: str) -> list:
-        """Split text into sentences"""
-        # Basic sentence splitting - could be improved with nltk
-        sentences = []
-        for line in text.split('\n'):
-            line = line.strip()
-            if not line:
-                continue
-            for sentence in line.split('. '):
-                sentence = sentence.strip()
-                if sentence:
-                    sentences.append(sentence)
-        return sentences
+    submission_sentences = _get_sentences(submission)
+    reference_sentences = _get_sentences(reference)
 
-    submission_sentences = get_sentences(submission)
-    reference_sentences = get_sentences(reference)
-
-    if not reference_sentences:
+    if not reference_sentences or not submission_sentences:
         return 0.0
-
 
     # For each reference sentence, find its best match in submission
     total_score = 0.0
@@ -217,13 +202,28 @@ def calculate_sentence_similarity(submission: str, reference: str) -> float:
         best_score = 0.0
         for sub_sent in submission_sentences:
             # Calculate fuzzy match ratio
-            ratio = SequenceMatcher(None, ref_sent.lower(), sub_sent.lower()).ratio()
+            ratio = SequenceMatcher(None, ref_sent, sub_sent).ratio()
             # Consider a match if ratio > 0.5 to catch partial matches
             if ratio > 0.5:
                 best_score = max(best_score, ratio)
         total_score += best_score
 
     return total_score / len(reference_sentences)
+
+
+def _get_sentences(text: str) -> list:
+    """Split text into sentences"""
+    # Basic sentence splitting - could be improved with nltk
+    sentences = []
+    for line in text.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        for sentence in line.split('. '):
+            sentence = sentence.strip()
+            if sentence:
+                sentences.append(sentence.lower())
+    return sentences
 
 
 def rolling_hash(text: str, base: int = 101) -> int:

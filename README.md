@@ -198,7 +198,9 @@ Submissions that pass these filters are eligible for bounties via [0din.ai](http
 
 ## Resources & Further Reading
 * [Blog: Quantifying the Unruly - A Scoring System for Jailbreak Tactics](https://0din.ai/blog/quantifying-the-unruly-a-scoring-system-for-jailbreak-tactics)
-* [Jailbreak Evaluation Framework Overview](https://0din.ai/research/jailbreak_evaluation_framework)
+* [Overview: Jailbreak Evaluation Framework](https://0din.ai/research/jailbreak_evaluation_framework)
+* [JEF Calculator](https://0din.ai/research/jailbreak_evaluation_framework/calculator)
+* [Standardized Testing](https://0din.ai/research/jailbreak_evaluation_framework/testing) (0DIN Researcher Authentication Required)
 
 ## Releases
 Releases are managed through GitHub Releases and automatically published to [PyPI](https://pypi.org/project/0din-jef/).

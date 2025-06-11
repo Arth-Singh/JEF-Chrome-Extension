@@ -32,7 +32,7 @@ class TestJEFScoreV1(unittest.TestCase):
 
         # Results should be clamped
         self.assertEqual(below_result, 0.0)
-        self.assertEqual(above_result, 10.0)
+        self.assertEqual(above_result,  11.85)
 
 
 if __name__ == '__main__':

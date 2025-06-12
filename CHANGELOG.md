@@ -40,3 +40,9 @@ All notable changes to this project will be documented in this file.
 - slight optimization to copyright algo. Truncation for submission relative to reference, sub cannot be more than 2x the length of ref
 - slight optimization to ast algo, reduced unnecessary set conversion by presetting them before analyses begins
 - updated the hp text download script to use the proper text
+
+## [0.1.3] - 2025-6-12
+
+### CHANGED
+- slight change to JEF scoring algorithm; added additional optional args to change clamp values for the scores
+- slight optimization to sentence similarity algo.

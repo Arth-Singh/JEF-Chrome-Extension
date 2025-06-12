@@ -241,11 +241,12 @@ Returns a [CopyrightScoreType Object](./jef/types.py). Max score is 100.
 
 ## JEFScore
 
+### Score
 ```python
 from jef import score
 
 # result -> float
-score = score(bv=0.3, bm=0.2, fd=0.1, rt=0.4,bv_lim=1.0,bm_lim=1.0,rt_lim=1.0,fd_lim=1.0)
+score = score(bv=0.3, bm=0.2, fd=0.1, rt=0.4)
 ```
 Returns the JEF Scoring Algorithm score based on the params provided.
 
@@ -254,8 +255,16 @@ bm stands for model blast radius
 rt stands for retargetability  
 fd stands for fidelity  
 
-The []_lim values set the upper limit of the respective values.  
-There are default values based on 0din's metrics so those dont have to be filled in.  
+### Calculator
+```python
+from jef import calculator
+
+# result -> float
+score = calculator(num_vendors=2, num_models=2, num_subjects=3, scores=[10])
+```
+Returns the JEF Scoring Algorithm score based on the params provided.  
+It uses the same core scoring algorithm as the score function, except you 
+can input the raw data instead of the calculated data.
 
 Please refer to the TOC under About JEF for more details.
 

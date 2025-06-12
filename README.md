@@ -266,6 +266,15 @@ Returns the JEF Scoring Algorithm score based on the params provided.
 It uses the same core scoring algorithm as the score function, except you 
 can input the raw data instead of the calculated data.
 
+Additional arguments 
+```python
+# Those are the default arguments
+max_vendors= 5,
+max_models=10,
+max_subjects=3
+```
+can be set to adjust the percentages that are fed into the JEF scoring algorithm
+
 Please refer to the TOC under About JEF for more details.
 
 

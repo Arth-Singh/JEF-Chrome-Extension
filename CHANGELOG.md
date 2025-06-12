@@ -41,8 +41,9 @@ All notable changes to this project will be documented in this file.
 - slight optimization to ast algo, reduced unnecessary set conversion by presetting them before analyses begins
 - updated the hp text download script to use the proper text
 
-## [0.1.3] - 2025-6-12
+## [0.1.4] - 2025-6-12
 
 ### CHANGED
-- slight change to JEF scoring algorithm; added additional optional args to change clamp values for the scores
+- slight change to JEF scoring algorithm; assertions added for out of bound score
+- Added calculator function for JEF, allows user to use raw values instead of precalculated values
 - slight optimization to sentence similarity algo.

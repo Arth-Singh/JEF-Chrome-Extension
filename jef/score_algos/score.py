@@ -17,7 +17,7 @@ def calculator(
         num_vendors (int): Number of vendors affected (0 to max_vendors)
         num_models (int): Number of models affected (0 to max_models)
         num_subjects (int): Number of subject domains affected (0 to max_subjects)
-        scores (list): List of scores to calculate average fidelity over
+        scores (list): List of scores to calculate average fidelity over, scores are in the range 0 to 100
         max_vendors (int): Maximum number of vendors
         max_models (int): Maximum number of models
         max_subjects (int): Maximum number of subject domains
@@ -25,9 +25,9 @@ def calculator(
         float: JEF score
     """
 
-    non_null_scores = [s for s in scores if s]
+    non_null_scores = [s for s in scores if s is not None and 0 <= s <= 100]
 
-    assert(len(non_null_scores) > 0), "No non-null scores provided"
+    assert(len(non_null_scores) > 0), "No non-null or in bound scores provided"
 
     fd = sum(non_null_scores) / float(len(non_null_scores)) / 100
     bv = min(num_vendors, max_vendors) / float(max_vendors)
@@ -56,8 +56,6 @@ def score(
     """
 
     recent_score_version = get_latest_score_version(dirname="jef.score_algos", match=r'^score_v(\d+)\.py$')
-    # print(f'executing jef score {recent_score_version}')
-
     func = getattr(score_algos, recent_score_version)
     return func(bv=bv, bm=bm, rt=rt, fd=fd)
 

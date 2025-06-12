@@ -12,6 +12,7 @@ class TestJEFScoreV1(unittest.TestCase):
         self.assertLessEqual(result, 10)
         self.assertIsInstance(result, float)
 
+
     def test_direct_jef_score_v1_boundary_values(self):
         """Test jef_score_v1 function with boundary values"""
         # Test min values (0, 0, 0, 0)
@@ -22,18 +23,21 @@ class TestJEFScoreV1(unittest.TestCase):
         max_result = score_v1(1, 1, 1, 1)
         self.assertEqual(max_result, 10.0)
 
-    def test_direct_jef_score_v1_clamping(self):
-        """Test that values are properly clamped"""
-        # Test values below 0
-        below_result = score_v1(-0.5, -0.4, -0.3, -0.2)
 
-        # Test values above 1
-        above_result = score_v1(1.5, 1.4, 1.3, 1.2)
+    def test_direct_jet_score_v1_error(self):
+        """Test that an error is raised when invalid values are provided"""
+        with self.assertRaises(AssertionError):
+            score_v1(-1, 0, 0, 0)
 
-        # Results should be clamped
-        self.assertEqual(below_result, 0.0)
-        self.assertEqual(above_result,  11.85)
+        with self.assertRaises(AssertionError):
+            score_v1(1.2, 0, 0, 0)
 
+
+    def test_float_clamping(self):
+        r1 = score_v1(0.6666, 0.6666, 0.66666, 0.66666666)
+        r2 = score_v1(0.666666, 0.66666, 0.66666, 0.6666)
+
+        self.assertEqual(r1, r2)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,8 @@
 [project]
 name = "0din-jef"
-version = "0.1.4" # update this before each release
+version = "0.1.5" #TODO-Update: this before each release
 description = "Jailbreak Evaluation Module"
+readme = "README.md"
 requires-python = ">=3.12"
 dependencies= []
 

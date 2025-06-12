@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
 - slight optimization to ast algo, reduced unnecessary set conversion by presetting them before analyses begins
 - updated the hp text download script to use the proper text
 
-## [0.1.4] - 2025-6-12
+## [0.1.5] - 2025-6-12
 
 ### CHANGED
 - slight change to JEF scoring algorithm; assertions added for out of bound score

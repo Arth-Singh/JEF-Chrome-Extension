@@ -1,8 +1,6 @@
 # 0din JEF Tester Chrome Extension
 
-A Chrome extension that provides a graphical interface for the [0din JEF (Jailbreak Evaluation Framework)](https://github.com/0din-ai/jef) tester. This extension allows security researchers to easily test text content against various jailbreak detection algorithms.
-
-![0din Extension Screenshot](screenshot.png)
+A Chrome extension that provides a graphical interface for the [0din JEF (Jailbreak Evaluation Framework)](https://github.com/0din-ai/0din-JEF) tester. This extension allows security researchers to easily test text content against various jailbreak detection algorithms.
 
 ## Features
 
@@ -179,7 +177,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues related to:
-- **JEF Framework**: Visit the [official JEF repository](https://github.com/0din-ai/jef)
+- **JEF Framework**: Visit the [official JEF repository](https://github.com/0din-ai/0din-JEF)
 - **This Extension**: Open an issue in this repository
 - **0din Platform**: Contact [0din.ai](https://0din.ai)
 

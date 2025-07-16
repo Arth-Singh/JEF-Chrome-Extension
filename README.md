@@ -14,6 +14,10 @@ A Chrome extension that provides a graphical interface for the [0din JEF (Jailbr
 - **Local Execution** - Runs tests locally via native messaging (no data sent to servers)
 - **Real-time Testing** - Fast analysis with immediate results
 
+Ie: <img width="501" height="627" alt="image" src="https://github.com/user-attachments/assets/5fa05c88-8013-467e-828d-d634dd6ade2e" />
+
+
+
 ## Prerequisites
 
 1. **JEF Framework** - You need the 0din JEF framework installed locally

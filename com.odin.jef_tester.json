@@ -1,0 +1,9 @@
+{
+  "name": "com.odin.jef_tester",
+  "description": "Native messaging host for 0din JEF Tester",
+  "path": "/path/to/your/0din-Extension/native-host/jef_native_host.py",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://YOUR_EXTENSION_ID_HERE/"
+  ]
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0din JEF Tester</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>0din JEF Tester</h1>
+        
+        <div class="input-section">
+            <label for="textInput">Paste your text here:</label>
+            <textarea id="textInput" rows="8" placeholder="Enter or paste the text you want to test..."></textarea>
+        </div>
+
+        <div class="test-selection">
+            <label for="testType">Select test type:</label>
+            <select id="testType">
+                <option value="score_tiananmen">Tiananmen Square Analysis</option>
+                <option value="score_agent_recipe">Nerve Agent Detection</option>
+                <option value="score_meth_recipe">Methamphetamine Detection</option>
+                <option value="copyright_score_hp">Copyright (Harry Potter)</option>
+            </select>
+        </div>
+
+        <button id="runTest" class="run-button">Run Test</button>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <span>Running test...</span>
+        </div>
+
+        <div id="results" class="results hidden">
+            <h2>Results</h2>
+            <div id="resultsContent"></div>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
